@@ -30,8 +30,8 @@ unqualified-search-registries = ["registry.access.redhat.com", "registry.redhat.
 ```
 
 ### registry.access.redhat.com vs registry.redhat.io
-`registry.access.redhat.com` - no login required
-`registry.redhat.io` - login required
+- `registry.access.redhat.com` - no login required
+- `registry.redhat.io` - login required
 
 
 ## `skopeo` command
