@@ -5,11 +5,16 @@
 - Understand private registry security
   - [Image Registries](#image-registries)
   - podman login
+  - [registry credentials](#registry-credentials)
 - Interact with many different registries
   - [skopeo command](#skopeo-command)
-- Understand and use image tags
+  - [podman inspect](#podman-inspect)
+- Understand and use [image tags](#image-tags)
 - Push and pull images from and to registries
+  - podman search
   - podman pull
+    - `/var/lib/containers` when running `podman` as root
+    - `~/.local/share/containers` when running `podman` as non root
   - podman push
 - Back up an image with its layers and meta data 
   - [podman save](#podman-save)
@@ -18,6 +23,11 @@
   - podman commit
   - podman save
   - podman load
+- Housekeeping
+  - podman rm
+  - podman rmi
+  - podman image prune
+    - Removes images without tags and not referenced by other images (also called dangling images)
 
 
 ## Image Registries
@@ -32,6 +42,15 @@ unqualified-search-registries = ["registry.access.redhat.com", "registry.redhat.
 ### registry.access.redhat.com vs registry.redhat.io
 - `registry.access.redhat.com` - no login required
 - `registry.redhat.io` - login required
+
+
+### registry credentials
+
+podman stores registry credentials in the file ${XDG_RUNTIME_DIR}/containers/auth.json
+
+Credentials are stored base4 encoded in the form USER:PASSWORD
+
+Use `base64 -d` to decode
 
 
 ## `skopeo` command
@@ -50,6 +69,25 @@ copy
   - skopeo copy docker://registry.access.redhat.com/ubi8 dir:ubi8
 ```
 
+
+### podman inspect
+
+To inspect local images, you can use the `podman inspect` command.
+
+
+## Image Tags
+
+Tagging a local image:
+
+```bash
+podman image tag LOCAL_IMAGE:TAG LOCAL_IMAGE:NEW_TAG
+```
+
+Building an image from a `Containerfile` and tagging it so you can push it to a remote repository:
+
+```bash
+podman build -f Containerfile -t REPO_NAME/USER_NAME/IMAGE_NAME:TAG
+```
 
 ## podman save
 
