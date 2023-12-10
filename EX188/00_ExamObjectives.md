@@ -1,6 +1,6 @@
 # EX188 Exam Objectives
 
-## Implement images using Podman
+## [Implement images using Podman](01_Implement_images_using_Podman.md)
 
     Understand and use FROM (the concept of a base image) instruction.
     Understand and use RUN instruction.
@@ -20,7 +20,7 @@
     Understand the lifecycle and cleanup requirements of this approach.
 
 
-## Manage images
+## [Manage images](03_Manage_Images.md)
 
     Understand private registry security.
     Interact with many different registries.
@@ -29,7 +29,7 @@
     Back up an image with its layers and meta data vs. backup a container state.
 
 
-## Run containers locally using Podman
+## [Run containers locally using Podman](01_Basic_Podman_Commands.md)
 
     Run containers locally using Podman
     Get container logs.
@@ -41,7 +41,7 @@
     Inspect running applications.
 
 
-## Run multi-container applications with Podman
+## [Run multi-container applications with Podman](04_Run_multi-container_applications_with_Podman.md)
 
     Create application stacks
     Understand container dependencies
@@ -51,7 +51,7 @@
     Working with configuration
 
 
-## Troubleshoot containerized applications
+## [Troubleshoot containerized applications](05_Troubleshoot_Containerized_Applications.md)
     Understand the description of application resources
     Get application logs
     Inspect running applications
@@ -65,3 +65,5 @@ During the exam you may be required to work with one or more pre-written applica
 # References
 
 [EX188 Exam Objectives](https://www.redhat.com/en/services/training/ex188-red-hat-certified-specialist-containers-exam?section=objectives)
+
+[Basic `podman` Commands](01_Basic_Podman_Commands.md)
