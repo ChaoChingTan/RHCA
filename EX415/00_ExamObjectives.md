@@ -67,3 +67,6 @@
 
 
 As with all Red Hat performance-based exams, configurations must persist after reboot without intervention.
+
+# Reference
+- [EX415](https://www.redhat.com/en/services/training/ex415-red-hat-certified-specialist-security-linux-exam) Red Hat Certified Specialist in Security: Linux exam
