@@ -2,7 +2,7 @@
 
 1. [Create and restrict an inventory](#create-and-restrict-an-inventory-to-an-automation-controller-user) to an [automation controller](#automation-controllers) user
 2. [Restrict a credential and/or a project to an automation controller user](#restrict-a-credential-andor-a-project-to-an-automation-controller-user)
-3. Be able to create and launch a template as an automation controller user
+3. [Be able to create and launch a template as an automation controller user](#be-able-to-create-and-launch-a-template-as-an-automation-controller-user)
 
 ## Automation Controllers
 
