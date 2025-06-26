@@ -80,6 +80,21 @@ Complete!
 
 ```
 
+`usbguard` is a service, we manage it as we would for any other services by using `systemctl`. To start the usbguard service, use `systemctl start`. `systemctl restart` after configuration changes. 
+```
+~]# systemctl start usbguard.service
+~]# systemctl status usbguard
+● usbguard.service - USBGuard daemon
+   Loaded: loaded (/usr/lib/systemd/system/usbguard.service; disabled; vendor preset: disabled)
+   Active: active (running) since Tue 2017-06-06 13:29:31 CEST; 9s ago
+     Docs: man:usbguard-daemon(8)
+ Main PID: 4984 (usbguard-daemon)
+   CGroup: /system.slice/usbguard.service
+           └─4984 /usr/sbin/usbguard-daemon -k -c /etc/usbguard/usbguard-daem...
+```
+
+`systemctl enable` to ensure it is started on boot for persistance.  
+
 ## Write device policy rules with specific criteria to manage devices
 
 Initial ruleset is empty:
@@ -88,14 +103,16 @@ Initial ruleset is empty:
 -rw-------. 1 root root 0 Feb  7 17:02 /etc/usbguard/rules.conf
 ```
 
-Generate initial ruleset by running `usbguard generate-policy > /etc/usbguard/rules.conf` as root.
+Generate initial local ruleset file by running `usbguard generate-policy > rules.conf`
+Then install the generated ruleset file as per man page. Restart service after configuration changes.
 
 ```
-[root@localhost /etc]# usbguard generate-policy > /etc/usbguard/rules.conf
+[root@localhost /tmp]# usbguard generate-policy > rules.conf
+[root@localhost /tmp]# install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf
+[root@localhost /tmp]# systemctl restart usbguard
 ```
 
-To customize the USBGuard rule set, edit the /etc/usbguard/rules.conf file. See the `usbguard-rules.conf(5)` man page for more information. 
-
+To customize the USBGuard rule set, see`usbguard-rules.conf(5)` man page for more information. 
 Selected output of `man 5 usbguard-rules.conf`:
 
 ```
@@ -130,20 +147,6 @@ EXAMPLE POLICIES
 ```
 
 ## Manage administrative policy and daemon configuration
-To start the usbguard service, use the `systemctl` command. Restart the service after configuration changes. 
-```
-~]# systemctl start usbguard.service
-~]# systemctl status usbguard
-● usbguard.service - USBGuard daemon
-   Loaded: loaded (/usr/lib/systemd/system/usbguard.service; disabled; vendor preset: disabled)
-   Active: active (running) since Tue 2017-06-06 13:29:31 CEST; 9s ago
-     Docs: man:usbguard-daemon(8)
- Main PID: 4984 (usbguard-daemon)
-   CGroup: /system.slice/usbguard.service
-           └─4984 /usr/sbin/usbguard-daemon -k -c /etc/usbguard/usbguard-daem...
-```
-
-`systemctl start` to start the service and `systemctl enable` to ensure it is started on boot. 
 
 The `usbguard-daemon.conf` is used to configure runtime parameters of the daemon.   
 
@@ -166,8 +169,8 @@ RuleFolder=/etc/usbguard/rules.d/
 ```
 
 Example:
-To add users, configure `IPCAllowedUsers`
-To allow groups, configure `IPCAllowedGroups`
+- To add users, configure `IPCAllowedUsers`.  These users will be allowed to use IPC interface to make changes to USBGuard. 
+- To allow groups, configure `IPCAllowedGroups`
 ```
        IPCAllowedUsers=username [username ...]
            A space delimited list of usernames that the daemon will accept IPC connections from. Default:
@@ -178,6 +181,13 @@ To allow groups, configure `IPCAllowedGroups`
 ```
 
 `man usbguard-daemon.conf` for more information.
+
+Example rules:
+```
+allow name "device-name"
+allow hash "value"
+```
+Remember to add this to original rules file if it was not empty. Use `install` command to install the new rules file. Restart via `systemctl restart usbguard` to make new rules effective.
 
 Details of USB ids can be found at `/usr/share/hwdata/usb.ids`
 - { 08:*:* } typically Mass Storage Devices
