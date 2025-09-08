@@ -35,7 +35,7 @@
     Manage administrative policy and daemon configuration.
 
 
-## Manage system login security using pluggable authentication modules (PAMs)
+## [Manage system login security using pluggable authentication modules (PAMs)](./06_PAM.md)
 
     Configure password quality requirements.
     Configure failed login policy.
