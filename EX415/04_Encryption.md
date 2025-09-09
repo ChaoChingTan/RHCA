@@ -12,7 +12,8 @@
 4. TANG(8) - Network-Based Cryptographic Binding Server
 5. CLEVIS(1) - Automated decryption policy framework
 6. FIREWALL-CMD(1) - firewalld command line client
-7. CRYPTSETUP-LUKSCHANGEKEY(8) - change an existing passphrase
+7. DRACUT(8) - low-level tool for generating an initramfs/initrd image
+8. CRYPTSETUP-LUKSCHANGEKEY(8) - change an existing passphrase
 
 
 ## Encrypt and decrypt block devices using LUKS
@@ -298,6 +299,20 @@ Verify after running this command by using `cryptsetup luksDump`.  You should se
 Regenerate initial ramdisk. This step is required else the network may not come up after reboot.
 ```bash
 dracut -fv --regenerate-all --hostonly-cmdline --add "network clevis"
+```
+
+`dracut --help` selected output to explain the options above:
+```
+Usage: /usr/bin/dracut [OPTION]... [<initramfs> [<kernel-version>]]
+
+Version: 057-88.git20250311.el9_6
+
+Creates initial ramdisk images for preloading modules
+  -f, --force           Overwrite existing initramfs file.
+  -a, --add [LIST]      Add a space-separated list of dracut modules.
+  -v, --verbose         Increase verbosity level.
+  --hostonly-cmdline    Store kernel command line arguments needed in the initramfs.
+  --regenerate-all      Regenerate all initramfs images at the default location for the kernel versions found on the system.
 ```
 
 
