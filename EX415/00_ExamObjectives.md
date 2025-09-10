@@ -49,7 +49,7 @@
     Produce audit reports.
 
 
-## Configure SELinux
+## [Configure SELinux](./08_SELinux.md)
 
     Enable SELinux on a host running a simple application.
     Interpret SELinux violations and determine remedial action.
