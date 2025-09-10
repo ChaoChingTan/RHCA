@@ -22,7 +22,7 @@
 - Configure AIDE to monitor critical system files.
 
 
-## Configure encrypted storage
+## [Configure encrypted storage](./04_Encryption.md)
     Encrypt and decrypt block devices using LUKS.
     Configure encrypted storage persistence using NBDE.
     Change encrypted storage passphrases.
@@ -42,7 +42,7 @@
     Modify PAM configuration files and parameters.
 
 
-## Configure system auditing
+## [Configure system auditing](./07_auditd.md)
 
     Write rules to log auditable events.
     Enable prepackaged rules.
