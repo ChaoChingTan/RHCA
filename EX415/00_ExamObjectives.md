@@ -57,7 +57,7 @@
     Analyze and correct existing SELinux configurations.
 
 
-## Enforce security compliance
+## [Enforce security compliance](./09_OpenSCAP.md)
 
     Install OpenSCAP and OpenSCAP Workbench.
     Scan hosts for security compliance
