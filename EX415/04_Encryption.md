@@ -13,7 +13,8 @@
 5. CLEVIS(1) - Automated decryption policy framework
 6. FIREWALL-CMD(1) - firewalld command line client
 7. DRACUT(8) - low-level tool for generating an initramfs/initrd image
-8. CRYPTSETUP-LUKSCHANGEKEY(8) - change an existing passphrase
+8. CLEVIS-ENCRYPT-SSS(1) - Encrypts using a Shamir's Secret Sharing policy
+9. CRYPTSETUP-LUKSCHANGEKEY(8) - change an existing passphrase
 
 
 ## Encrypt and decrypt block devices using LUKS
@@ -320,6 +321,13 @@ Creates initial ramdisk images for preloading modules
   --regenerate-all      Regenerate all initramfs images at the default location for the kernel versions found on the system.
 ```
 
+To support redundancy, use manpage of `clevis-encrypt-sss` for configuration examples:
+```
+       For example, let’s create a high-availability setup using Tang:
+
+           $ cfg='{"t":1,"pins":{"tang":[{"url":...},{"url":...}]}}'
+           $ clevis encrypt sss "$cfg" < PT > JWE
+```
 
 ## Change encrypted storage passphrases
 Use `cryptsetup luksChangeKey` command:
