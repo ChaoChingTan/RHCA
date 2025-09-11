@@ -225,9 +225,14 @@ DESCRIPTION
     .
     .
 ```
+`crypttab` file should have `_netdev` field:
+```
+volume-name encrypted-device none _netdev
+```
+
 - /etc/fstab - put the `/dev/mapper` device in fstab.
 ```
-/dev/mapper/<device>    /mnt    xfs    defaults    0   0 
+/dev/mapper/<device>    /mnt    xfs    _netdev    1   2 
 ```
 
 For encrypted storage persistence using NBDE, you will need a client-server setup using `tang` on the server side and `clevis` on the client.  `tang` is a Network-Based Cryptographic Binding Server. After installation, start and enable the service, according to instruction from man pages:
